@@ -23,7 +23,6 @@ class Index extends React.Component{
                 headers: headers
         })
         .then(res => {
-            console.log(res.data)
             this.setState({ getResponse : res.data })
         })
         .catch(err => {

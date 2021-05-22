@@ -3,10 +3,17 @@ import axios from 'axios';
 import Card from '../../components/defaultCard';
 
 
-class CreateSchedule extends React.Component{
+class CreateDrug extends React.Component{
 
     state = {
-        schedule : '',
+        name : '',
+        dosage: '',
+        price: '',
+        schedule_id: '',
+        person_id: '',
+        period: '',
+        people: '',
+        schedules: '',
         apiResponse: undefined
     }
 
@@ -16,12 +23,52 @@ class CreateSchedule extends React.Component{
         this.setState({ [fieldName]: value })
     }
 
-    CreateSchedule = async (event) => {
+    componentDidMount(){
+
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + localStorage.getItem('USER_TOKEN')
+        }
+
+        axios.get(
+            process.env.REACT_APP_LINK_API+'/people', {
+                headers: headers
+        })
+        .then(res => {
+            this.setState({ people : res.data.data })
+        })
+        .catch(err => {
+            if(err.response){
+                this.setState({ apiResponse : err.response.data })
+            }
+        })
+
+        axios.get(
+            process.env.REACT_APP_LINK_API+'/schedules', {
+                headers: headers
+        })
+        .then(res => {
+            this.setState({ schedules : res.data.data })
+        })
+        .catch(err => {
+            if(err.response){
+                this.setState({ apiResponse : err.response.data })
+            }
+        })
+    }
+
+    CreateDrug = async (event) => {
 
         event.preventDefault();
 
         const form = {
-            schedule: this.state.schedule,
+            name : this.state.name,
+            dosage: this.state.dosage,
+            price: this.state.price,
+            schedule_id: this.state.schedule_id,
+            person_id: this.state.person_id,
+            period: this.state.period,
         } 
 
         let config = {
@@ -34,7 +81,7 @@ class CreateSchedule extends React.Component{
         }
         
         await axios.post(
-            process.env.REACT_APP_LINK_API+'/schedules', 
+            process.env.REACT_APP_LINK_API+'/drugs', 
                 form,
                 config
             )
@@ -45,8 +92,23 @@ class CreateSchedule extends React.Component{
             .catch(err => {
                 if(err.response){
                     if(err.response.status === 422){
-                        if(err.response.data.message.schedule){
-                            response.message += err.response.data.message.schedule[0] + ' '
+                        if(err.response.data.message.name){
+                            response.message += err.response.data.message.name[0] + ' '
+                        }
+                        if(err.response.data.message.dosage){
+                            response.message += err.response.data.message.dosage[0] + ' '
+                        }
+                        if(err.response.data.message.price){
+                            response.message += err.response.data.message.price[0] + ' '
+                        }
+                        if(err.response.data.message.schedule_id){
+                            response.message += err.response.data.message.schedule_id[0] + ' '
+                        }
+                        if(err.response.data.message.person_id){
+                            response.message += err.response.data.message.person_id[0] + ' '
+                        }
+                        if(err.response.data.message.period){
+                            response.message += err.response.data.message.period[0] + ' '
                         }
                     }else if(err.response.status === 500){
                         response.message = err.response.data.message
@@ -65,7 +127,7 @@ class CreateSchedule extends React.Component{
 
     render(){
         return(
-            <Card title='Cadastro de Horário'>
+            <Card title='Cadastro de Medicamento'>
                 {
                     this.state.apiResponse !== undefined && !this.state.apiResponse.success &&
                     <div className="alert alert-dismissible alert-danger">
@@ -80,12 +142,68 @@ class CreateSchedule extends React.Component{
                         <strong>{this.state.apiResponse.message}</strong>
                     </div>
                 }
-                <form id="CreateScheduleForm" onSubmit={this.CreateSchedule}>
+                <form id="CreateDrugForm" onSubmit={this.CreateDrug}>
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Nome*</label>
+                                <input type="text" name="name" className="form-control" value={this.state.name} onChange={this.onChange} required></input> 
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Dosagem (em mg)*</label>
+                                <input type="number" name="dosage" className="form-control" value={this.state.dosage} onChange={this.onChange} min="10" max="100" required></input> 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Preço</label>
+                                <input type="number" step="0.01" name="price" className="form-control" value={this.state.price} onChange={this.onChange}></input> 
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Período (em dias)*</label>
+                                <input type="number" name="period" className="form-control" value={this.state.period} onChange={this.onChange} required></input> 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
                             <div className="form-group">
                                 <label>Horário*</label>
-                                <input type="text" name="schedule" className="form-control" value={this.state.schedule} onChange={this.onChange} required></input> 
+                                <select name="schedule_id" className="form-control" value={this.state.schedule_id} onChange={this.onChange} required>
+                                    <option value="">selecione...</option>
+                                    {   
+                                        (this.state.schedules !== '' &&
+                                            this.state.schedules.map((schedule) => {
+                                                return (
+                                                    <option key={schedule.id} value={schedule.id}>{schedule.schedule}</option>
+                                                )
+                                            })
+                                        ) 
+                                    }
+                                </select>
+                            </div>
+                        </div>       
+                        <div className="col-md-6">
+                            <div className="form-group">
+                                <label>Pessoa*</label>
+                                <select name="person_id" className="form-control" value={this.state.person_id} onChange={this.onChange} required>
+                                    <option value="">selecione...</option>
+                                    {   
+                                        (this.state.people !== '' &&
+                                            this.state.people.map((person) => {
+                                                return (
+                                                    <option key={person.id} value={person.id}>{person.name}</option>
+                                                )
+                                            })
+                                        ) 
+                                    }
+                                </select>                            
                             </div>
                         </div>
                     </div>
@@ -104,4 +222,4 @@ class CreateSchedule extends React.Component{
 
 }
 
-export default CreateSchedule
+export default CreateDrug
