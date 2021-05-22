@@ -39,6 +39,16 @@ function Navbar(){
                                     <a className="nav-link" href="/horarios">Horários</a>
                                 </li>
                         }
+                        {
+                            (window.location.pathname === '/medicamentos') ?
+                                <li className="nav-item active">
+                                    <a className="nav-link" href="/medicamentos">Medicamentos</a>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/medicamentos">Medicamentos</a>
+                                </li>
+                        }
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">

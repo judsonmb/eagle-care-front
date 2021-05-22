@@ -9,6 +9,9 @@ import UpdatePerson from './pages/people/update'
 import Schedules from './pages/schedules/'
 import CreateSchedule from './pages/schedules/create'
 import UpdateSchedule from './pages/schedules/update'
+import Drugs from './pages/drugs/'
+import CreateDrug from './pages/drugs/create'
+import UpdateDrug from './pages/drugs/update'
 
 const routes = () =>  {
     return (
@@ -46,6 +49,18 @@ const routes = () =>  {
 
                 <Route exact path="/horarios/editar">
                     {localStorage.getItem('USER_TOKEN') ? <UpdateSchedule /> : <Login />}
+                </Route>
+
+                <Route exact path="/medicamentos">
+                    {localStorage.getItem('USER_TOKEN') ? <Drugs /> : <Login />}
+                </Route>
+
+                <Route exact path="/medicamentos/cadastrar">
+                    {localStorage.getItem('USER_TOKEN') ? <CreateDrug /> : <Login />}
+                </Route>
+
+                <Route exact path="/medicamentos/editar">
+                    {localStorage.getItem('USER_TOKEN') ? <UpdateDrug /> : <Login />}
                 </Route>
             </Switch>
         </Router>
