@@ -49,6 +49,36 @@ function Navbar(){
                                     <a className="nav-link" href="/medicamentos">Medicamentos</a>
                                 </li>
                         }
+                        {
+                            (window.location.pathname === '/quem-mais-gasta') ?
+                                <li className="nav-item active">
+                                    <a className="nav-link" href="/quem-mais-gasta">Mais gasta</a>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/quem-mais-gasta">Mais gasta</a>
+                                </li>
+                        }
+                        {
+                            (window.location.pathname === '/medicamentos-mais-usados') ?
+                                <li className="nav-item active">
+                                    <a className="nav-link" href="/medicamentos-mais-usados">Mais usados</a>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/medicamentos-mais-usados">Mais usados</a>
+                                </li>
+                        }
+                        {
+                            (window.location.pathname === '/pessoas-usam-mesmo-medicamento') ?
+                                <li className="nav-item active">
+                                    <a className="nav-link" href="/pessoas-usam-mesmo-medicamento">Mesmo medicamento</a>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <a className="nav-link" href="/pessoas-usam-mesmo-medicamento">Mesmo medicamento</a>
+                                </li>
+                        }
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">

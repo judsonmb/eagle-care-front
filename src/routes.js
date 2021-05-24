@@ -8,8 +8,11 @@ import CreatePerson from './pages/people/create'
 import UpdatePerson from './pages/people/update'
 import Drugs from './pages/drugs/'
 import CreateDrug from './pages/drugs/create'
-import UpdateDrug from './pages/drugs/update'
 import Schedule from './pages/schedules/'
+import WhoMoreExpend from './pages/reports/who-more-expend'
+import MoreUsedDrugs from './pages/reports/more-used-drugs'
+import PeopleUseSameDrugs from './pages/reports/people-use-same-drugs'
+
 
 const routes = () =>  {
     return (
@@ -45,12 +48,20 @@ const routes = () =>  {
                     {localStorage.getItem('USER_TOKEN') ? <CreateDrug /> : <Login />}
                 </Route>
 
-                <Route exact path="/medicamentos/editar">
-                    {localStorage.getItem('USER_TOKEN') ? <UpdateDrug /> : <Login />}
-                </Route>
-
                 <Route exact path="/horarios">
                     {localStorage.getItem('USER_TOKEN') ? <Schedule /> : <Login />}
+                </Route>
+
+                <Route exact path="/quem-mais-gasta">
+                    {localStorage.getItem('USER_TOKEN') ? <WhoMoreExpend /> : <Login />}
+                </Route>
+
+                <Route exact path="/medicamentos-mais-usados">
+                    {localStorage.getItem('USER_TOKEN') ? <MoreUsedDrugs /> : <Login />}
+                </Route>
+
+                <Route exact path="/pessoas-usam-mesmo-medicamento">
+                    {localStorage.getItem('USER_TOKEN') ? <PeopleUseSameDrugs /> : <Login />}
                 </Route>
             </Switch>
         </Router>

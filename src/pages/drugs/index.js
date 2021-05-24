@@ -111,7 +111,6 @@ class Index extends React.Component{
                                             <td>{drug.period} dias</td>
                                             <td>{drug.first_time_at}</td>
                                             <td>
-                                                <button type="button" onClick={() => this.goToUpdatePage(drug.id)} className="btn btn-warning disabled">Editar</button>
                                                 <button type="button" onClick={() => this.removeUser(drug.id)} className="btn btn-danger">Excluir</button>
                                             </td>
                                         </tr>

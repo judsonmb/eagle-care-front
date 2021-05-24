@@ -3,10 +3,11 @@ import axios from 'axios';
 import Card from '../../components/defaultCard';
 
 
-class Index extends React.Component{
+class PeopleUseSameDrugs extends React.Component{
 
     state = {
         getResponse : undefined,
+        removeResponse : undefined
     }
 
     componentDidMount(){
@@ -18,7 +19,7 @@ class Index extends React.Component{
         }
 
         axios.get(
-            process.env.REACT_APP_LINK_API+'/schedules', {
+            process.env.REACT_APP_LINK_API+'/people-use-same-drugs', {
                 headers: headers
         })
         .then(res => {
@@ -33,42 +34,33 @@ class Index extends React.Component{
 
     render(){
         return(
-            <Card title="Horários">
+            <Card title="Pessoas que usam o mesmo medicamento">
                 {
                     this.state.getResponse === undefined && <div className="spinner-border"></div>
-                }
-                {   
-                    (this.state.removeResponse !== undefined && this.state.removeResponse.message && !this.state.removeResponse.success) &&
-                        <div className="alert alert-dismissible alert-danger">
-                            <button type="button" className="close" data-dismiss="alert">&times;</button>
-                                <strong>{this.state.removeResponse.message}</strong>
-                        </div>
-                }
-                {   
-                    (this.state.removeResponse !== undefined && this.state.removeResponse.message && this.state.removeResponse.success) &&
-                        <div className="alert alert-dismissible alert-success">
-                            <button type="button" className="close" data-dismiss="alert">&times;</button>
-                                <strong>{this.state.removeResponse.message}</strong>
-                        </div>
                 }
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Próximos horários</th>
-                            <th scope="col">Pessoa</th>
                             <th scope="col">Medicamento</th>
+                            <th scope="col">Pessoas</th>
                         </tr>
                     </thead>
                     <tbody>
                         {   
                             (this.state.getResponse !== undefined && this.state.getResponse.data &&
-                                this.state.getResponse.data.map((schedule) => {
+                                this.state.getResponse.data.map((drug) => {
                                     return (
-                                        <tr key={schedule.id}>
-                                            <td>{schedule.schedule}</td>
-                                            <td>{schedule.drug.person.name}</td>
-                                            <td>{schedule.drug.name}</td>
+                                        <tr key={drug.name}>
+                                            <td>{drug.name}</td>
+                                            <td>
+                                                {drug.people.map((people) => {
+                                                    return (
+                                                        people.name + ", "                                                 )  
+                                                })}
                                             
+                                            
+                                            
+                                            </td>
                                         </tr>
                                         )
                                 })
@@ -81,4 +73,4 @@ class Index extends React.Component{
     }
 }
 
-export default Index
+export default PeopleUseSameDrugs

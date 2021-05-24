@@ -151,13 +151,13 @@ class CreateDrug extends React.Component{
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Preço</label>
+                                <label>Preço (total de unidades para o período todo)</label>
                                 <input type="number" step="0.01" name="price" className="form-control" value={this.state.price} onChange={this.onChange}></input> 
                             </div>
                         </div>
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Período (em dias)*</label>
+                                <label>Período (por quantos dias vai tomar)*</label>
                                 <input type="number" name="period" className="form-control" value={this.state.period} onChange={this.onChange} required></input> 
                             </div>
                         </div>
@@ -165,7 +165,7 @@ class CreateDrug extends React.Component{
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Intervalo (em horas)*</label>
+                                <label>Intervalo (de quantas em quantas horas)*</label>
                                 <input type="number" name="interval" className="form-control" value={this.state.interval} onChange={this.onChange} required></input>
                             </div>
                         </div>       
