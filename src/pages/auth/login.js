@@ -40,6 +40,7 @@ class Login extends React.Component{
                 localStorage.setItem('USER_TOKEN', res.data.data.token)
                 localStorage.setItem('USER_ID', res.data.data.id)
                 localStorage.setItem('USER_NAME', res.data.data.name)
+                apiResponse = res.data.status
                 window.location.pathname = "/home"
                 window.location.href = "/home"
             })
@@ -75,7 +76,7 @@ class Login extends React.Component{
                         <div className="col-md-12">
                             <Card title="Login">
                                 {
-                                    this.state.apiResponse !== undefined &&
+                                    this.state.apiResponse !== undefined && this.state.apiResponse !== 200 &&
                                     <div className="alert alert-dismissible alert-danger">
                                         <button type="button" className="close" data-dismiss="alert">&times;</button>
                                         <strong>{this.state.apiResponse}</strong>

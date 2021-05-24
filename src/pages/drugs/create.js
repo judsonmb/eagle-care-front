@@ -46,6 +46,9 @@ class CreateDrug extends React.Component{
 
     CreateDrug = async (event) => {
 
+        document.getElementById("save-button").innerHTML = 'Aguarde...';
+        document.getElementById("save-button").prop("disabled", true);
+
         event.preventDefault();
 
         const form = {
@@ -101,7 +104,10 @@ class CreateDrug extends React.Component{
                     }
                 }
             })
-        
+
+        document.getElementById("save-button").innerHTML = 'Salvar';
+        document.getElementById("save-button").prop("disabled", false);
+    
         this.setState({ apiResponse: response })
     }
 
@@ -189,7 +195,7 @@ class CreateDrug extends React.Component{
                     </div>
                     <div className="row">
                         <div className="col-md-1">
-                            <button type="submit" className="btn btn-success">Salvar</button>
+                            <button id="save-button" type="submit" className="btn btn-success">Salvar</button>
                         </div>
                         <div className="col-md-1">
                             <button className="btn btn-warning" onClick={this.clearFields}>Limpar</button> 
