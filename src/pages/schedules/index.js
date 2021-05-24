@@ -7,7 +7,6 @@ class Index extends React.Component{
 
     state = {
         getResponse : undefined,
-        removeResponse : undefined
     }
 
     componentDidMount(){
@@ -23,7 +22,6 @@ class Index extends React.Component{
                 headers: headers
         })
         .then(res => {
-            console.log(res.data)
             this.setState({ getResponse : res.data })
         })
         .catch(err => {
@@ -31,39 +29,6 @@ class Index extends React.Component{
                 this.setState({ getResponse : err.response.data })
             }
         })
-    }
-
-    goToUpdatePage(id){
-        localStorage.setItem('SELECTED', id)
-        window.location.href = "/horarios/editar"
-    }
-
-    removeUser = async (id) => {
-        
-        const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + localStorage.getItem('USER_TOKEN')
-        }
-    
-        let response = {
-            success: false,
-            message: ''
-        }
-
-        await axios.delete(
-            process.env.REACT_APP_LINK_API+'/schedules/'+id, {
-                headers: headers
-            })
-            .then(res => {
-                response.success = true
-                response.message = res.data.message
-                this.componentDidMount()
-            })
-            .catch(err => {
-                response.message = err.data.message
-            })
-            this.setState({ removeResponse : response })
     }
 
     render(){
@@ -86,12 +51,12 @@ class Index extends React.Component{
                                 <strong>{this.state.removeResponse.message}</strong>
                         </div>
                 }
-                <a href="/horarios/cadastrar/"><button type="button" className="btn btn-success">Cadastrar</button></a>
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Horário</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col">Pessoa</th>
+                            <th scope="col">Medicamento</th>
+                            <th scope="col">Próximo horário</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,11 +65,9 @@ class Index extends React.Component{
                                 this.state.getResponse.data.map((schedule) => {
                                     return (
                                         <tr key={schedule.id}>
+                                            <td>{schedule.drug.person.name}</td>
+                                            <td>{schedule.drug.name}</td>
                                             <td>{schedule.schedule}</td>
-                                            <td>
-                                                <button type="button" onClick={() => this.goToUpdatePage(schedule.id)} className="btn btn-warning disabled">Editar</button>
-                                                <button type="button" onClick={() => this.removeUser(schedule.id)} className="btn btn-danger">Excluir</button>
-                                            </td>
                                         </tr>
                                         )
                                 })

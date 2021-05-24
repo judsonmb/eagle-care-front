@@ -9,11 +9,10 @@ class CreateDrug extends React.Component{
         name : '',
         dosage: '',
         price: '',
-        schedule_id: '',
+        interval: '',
         person_id: '',
         period: '',
         people: '',
-        schedules: '',
         apiResponse: undefined
     }
 
@@ -43,19 +42,6 @@ class CreateDrug extends React.Component{
                 this.setState({ apiResponse : err.response.data })
             }
         })
-
-        axios.get(
-            process.env.REACT_APP_LINK_API+'/schedules', {
-                headers: headers
-        })
-        .then(res => {
-            this.setState({ schedules : res.data.data })
-        })
-        .catch(err => {
-            if(err.response){
-                this.setState({ apiResponse : err.response.data })
-            }
-        })
     }
 
     CreateDrug = async (event) => {
@@ -66,7 +52,7 @@ class CreateDrug extends React.Component{
             name : this.state.name,
             dosage: this.state.dosage,
             price: this.state.price,
-            schedule_id: this.state.schedule_id,
+            interval: this.state.interval,
             person_id: this.state.person_id,
             period: this.state.period,
         } 
@@ -101,8 +87,8 @@ class CreateDrug extends React.Component{
                         if(err.response.data.message.price){
                             response.message += err.response.data.message.price[0] + ' '
                         }
-                        if(err.response.data.message.schedule_id){
-                            response.message += err.response.data.message.schedule_id[0] + ' '
+                        if(err.response.data.message.interval){
+                            response.message += err.response.data.message.interval[0] + ' '
                         }
                         if(err.response.data.message.person_id){
                             response.message += err.response.data.message.person_id[0] + ' '
@@ -121,7 +107,12 @@ class CreateDrug extends React.Component{
 
     clearFields = () => {
         this.setState({ 
-            schedule: '',
+            name : '',
+            dosage: '',
+            price: '',
+            interval: '',
+            person_id: '',
+            period: '',
         })
     }
 
@@ -174,19 +165,8 @@ class CreateDrug extends React.Component{
                     <div className="row">
                         <div className="col-md-6">
                             <div className="form-group">
-                                <label>Horário*</label>
-                                <select name="schedule_id" className="form-control" value={this.state.schedule_id} onChange={this.onChange} required>
-                                    <option value="">selecione...</option>
-                                    {   
-                                        (this.state.schedules !== '' &&
-                                            this.state.schedules.map((schedule) => {
-                                                return (
-                                                    <option key={schedule.id} value={schedule.id}>{schedule.schedule}</option>
-                                                )
-                                            })
-                                        ) 
-                                    }
-                                </select>
+                                <label>Intervalo (em horas)*</label>
+                                <input type="number" name="interval" className="form-control" value={this.state.interval} onChange={this.onChange} required></input>
                             </div>
                         </div>       
                         <div className="col-md-6">

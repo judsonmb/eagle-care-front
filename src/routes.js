@@ -6,12 +6,10 @@ import Home from './pages/home'
 import People from './pages/people/'
 import CreatePerson from './pages/people/create'
 import UpdatePerson from './pages/people/update'
-import Schedules from './pages/schedules/'
-import CreateSchedule from './pages/schedules/create'
-import UpdateSchedule from './pages/schedules/update'
 import Drugs from './pages/drugs/'
 import CreateDrug from './pages/drugs/create'
 import UpdateDrug from './pages/drugs/update'
+import Schedule from './pages/schedules/'
 
 const routes = () =>  {
     return (
@@ -39,18 +37,6 @@ const routes = () =>  {
                     {localStorage.getItem('USER_TOKEN') ? <UpdatePerson /> : <Login />}
                 </Route>
 
-                <Route exact path="/horarios">
-                    {localStorage.getItem('USER_TOKEN') ? <Schedules /> : <Login />}
-                </Route>
-
-                <Route exact path="/horarios/cadastrar">
-                    {localStorage.getItem('USER_TOKEN') ? <CreateSchedule /> : <Login />}
-                </Route>
-
-                <Route exact path="/horarios/editar">
-                    {localStorage.getItem('USER_TOKEN') ? <UpdateSchedule /> : <Login />}
-                </Route>
-
                 <Route exact path="/medicamentos">
                     {localStorage.getItem('USER_TOKEN') ? <Drugs /> : <Login />}
                 </Route>
@@ -61,6 +47,10 @@ const routes = () =>  {
 
                 <Route exact path="/medicamentos/editar">
                     {localStorage.getItem('USER_TOKEN') ? <UpdateDrug /> : <Login />}
+                </Route>
+
+                <Route exact path="/horarios">
+                    {localStorage.getItem('USER_TOKEN') ? <Schedule /> : <Login />}
                 </Route>
             </Switch>
         </Router>

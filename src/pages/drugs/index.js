@@ -91,10 +91,10 @@ class Index extends React.Component{
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Dosagem</th>
-                            <th scope="col">Preço</th>
+                            <th scope="col">Preço (total)</th>
                             <th scope="col">Pessoa</th>
-                            <th scope="col">Horário</th>
                             <th scope="col">Período</th>
+                            <th scope="col">Tomou primeira vez</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -107,9 +107,9 @@ class Index extends React.Component{
                                             <td>{drug.name}</td>
                                             <td>{drug.dosage} mg</td>
                                             <td>R$ {drug.price}</td>
-                                            <td>{drug.person.name}</td>
-                                            <td>{drug.schedule.schedule}</td>
+                                            <td>{drug.person_name}</td>
                                             <td>{drug.period} dias</td>
+                                            <td>{drug.first_time_at}</td>
                                             <td>
                                                 <button type="button" onClick={() => this.goToUpdatePage(drug.id)} className="btn btn-warning disabled">Editar</button>
                                                 <button type="button" onClick={() => this.removeUser(drug.id)} className="btn btn-danger">Excluir</button>
