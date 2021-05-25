@@ -38,28 +38,30 @@ class WhoMoreExpend extends React.Component{
                 {
                     this.state.getResponse === undefined && <div className="spinner-border"></div>
                 }
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {   
-                            (this.state.getResponse !== undefined && this.state.getResponse.data &&
-                                this.state.getResponse.data.map((person) => {
-                                    return (
-                                        <tr key={person.id}>
-                                            <td>{person.name}</td>
-                                            <td>{person.value}</td>
-                                        </tr>
-                                        )
-                                })
-                            ) 
-                        }
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {   
+                                (this.state.getResponse !== undefined && this.state.getResponse.data &&
+                                    this.state.getResponse.data.map((person) => {
+                                        return (
+                                            <tr key={person.id}>
+                                                <td>{person.name}</td>
+                                                <td>{person.value}</td>
+                                            </tr>
+                                            )
+                                    })
+                                ) 
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </Card>
         )
     }

@@ -51,31 +51,33 @@ class Index extends React.Component{
                                 <strong>{this.state.removeResponse.message}</strong>
                         </div>
                 }
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Próximos horários</th>
-                            <th scope="col">Pessoa</th>
-                            <th scope="col">Medicamento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {   
-                            (this.state.getResponse !== undefined && this.state.getResponse.data &&
-                                this.state.getResponse.data.map((schedule) => {
-                                    return (
-                                        <tr key={schedule.id}>
-                                            <td>{schedule.schedule}</td>
-                                            <td>{schedule.person_name}</td>
-                                            <td>{schedule.drug_name}</td>
-                                            
-                                        </tr>
-                                        )
-                                })
-                            ) 
-                        }
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Próximos horários</th>
+                                <th scope="col">Pessoa</th>
+                                <th scope="col">Medicamento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {   
+                                (this.state.getResponse !== undefined && this.state.getResponse.data &&
+                                    this.state.getResponse.data.map((schedule) => {
+                                        return (
+                                            <tr key={schedule.id}>
+                                                <td>{schedule.schedule}</td>
+                                                <td>{schedule.person_name}</td>
+                                                <td>{schedule.drug_name}</td>
+                                                
+                                            </tr>
+                                            )
+                                    })
+                                ) 
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </Card>
         )
     }

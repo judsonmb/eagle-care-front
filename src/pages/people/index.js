@@ -86,31 +86,33 @@ class Index extends React.Component{
                         </div>
                 }
                 <a href="/pessoas/cadastrar/"><button type="button" className="btn btn-success">Cadastrar</button></a>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {   
-                            (this.state.getResponse !== undefined && this.state.getResponse.data &&
-                                this.state.getResponse.data.map((person) => {
-                                    return (
-                                        <tr key={person.id}>
-                                            <td>{person.name}</td>
-                                            <td>
-                                                <button type="button" onClick={() => this.goToUpdatePage(person.id)} className="btn btn-warning disabled">Editar</button>
-                                                <button type="button" onClick={() => this.removeUser(person.id)} className="btn btn-danger">Excluir</button>
-                                            </td>
-                                        </tr>
-                                        )
-                                })
-                            ) 
-                        }
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {   
+                                (this.state.getResponse !== undefined && this.state.getResponse.data &&
+                                    this.state.getResponse.data.map((person) => {
+                                        return (
+                                            <tr key={person.id}>
+                                                <td>{person.name}</td>
+                                                <td>
+                                                    <button type="button" onClick={() => this.goToUpdatePage(person.id)} className="btn btn-warning disabled">Editar</button>
+                                                    <button type="button" onClick={() => this.removeUser(person.id)} className="btn btn-danger">Excluir</button>
+                                                </td>
+                                            </tr>
+                                            )
+                                    })
+                                ) 
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </Card>
         )
     }

@@ -86,42 +86,44 @@ class Index extends React.Component{
                         </div>
                 }
                 <a href="/medicamentos/cadastrar/"><button type="button" className="btn btn-success">Cadastrar</button></a>
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Dosagem</th>
-                            <th scope="col">Preço (total)</th>
-                            <th scope="col">Pessoa</th>
-                            <th scope="col">Intervalo</th>
-                            <th scope="col">Período</th>
-                            <th scope="col">Tomou primeira vez em</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {   
-                            (this.state.getResponse !== undefined && this.state.getResponse.data &&
-                                this.state.getResponse.data.map((drug) => {
-                                    return (
-                                        <tr key={drug.id}>
-                                            <td>{drug.name}</td>
-                                            <td>{drug.dosage}</td>
-                                            <td>{drug.price}</td>
-                                            <td>{drug.person_name}</td>
-                                            <td>{drug.interval}</td>
-                                            <td>{drug.period}</td>
-                                            <td>{drug.first_time_at}</td>
-                                            <td>
-                                                <button type="button" onClick={() => this.removeUser(drug.id)} className="btn btn-danger">Excluir</button>
-                                            </td>
-                                        </tr>
-                                        )
-                                })
-                            ) 
-                        }
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Dosagem</th>
+                                <th scope="col">Preço (total)</th>
+                                <th scope="col">Pessoa</th>
+                                <th scope="col">Intervalo</th>
+                                <th scope="col">Período</th>
+                                <th scope="col">Tomou primeira vez em</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {   
+                                (this.state.getResponse !== undefined && this.state.getResponse.data &&
+                                    this.state.getResponse.data.map((drug) => {
+                                        return (
+                                            <tr key={drug.id}>
+                                                <td>{drug.name}</td>
+                                                <td>{drug.dosage}</td>
+                                                <td>{drug.price}</td>
+                                                <td>{drug.person_name}</td>
+                                                <td>{drug.interval}</td>
+                                                <td>{drug.period}</td>
+                                                <td>{drug.first_time_at}</td>
+                                                <td>
+                                                    <button type="button" onClick={() => this.removeUser(drug.id)} className="btn btn-danger">Excluir</button>
+                                                </td>
+                                            </tr>
+                                            )
+                                    })
+                                ) 
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </Card>
         )
     }
