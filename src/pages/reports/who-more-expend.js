@@ -52,7 +52,7 @@ class WhoMoreExpend extends React.Component{
                                     return (
                                         <tr key={person.id}>
                                             <td>{person.name}</td>
-                                            <td>R$ {person.value}</td>
+                                            <td>{person.value}</td>
                                         </tr>
                                         )
                                 })

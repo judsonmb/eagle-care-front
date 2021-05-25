@@ -66,8 +66,8 @@ class Index extends React.Component{
                                     return (
                                         <tr key={schedule.id}>
                                             <td>{schedule.schedule}</td>
-                                            <td>{schedule.drug.person.name}</td>
-                                            <td>{schedule.drug.name}</td>
+                                            <td>{schedule.person_name}</td>
+                                            <td>{schedule.drug_name}</td>
                                             
                                         </tr>
                                         )

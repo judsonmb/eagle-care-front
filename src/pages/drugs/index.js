@@ -93,8 +93,9 @@ class Index extends React.Component{
                             <th scope="col">Dosagem</th>
                             <th scope="col">Preço (total)</th>
                             <th scope="col">Pessoa</th>
+                            <th scope="col">Intervalo</th>
                             <th scope="col">Período</th>
-                            <th scope="col">Tomou primeira vez</th>
+                            <th scope="col">Tomou primeira vez em</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
@@ -105,10 +106,11 @@ class Index extends React.Component{
                                     return (
                                         <tr key={drug.id}>
                                             <td>{drug.name}</td>
-                                            <td>{drug.dosage} mg</td>
-                                            <td>R$ {drug.price}</td>
+                                            <td>{drug.dosage}</td>
+                                            <td>{drug.price}</td>
                                             <td>{drug.person_name}</td>
-                                            <td>{drug.period} dias</td>
+                                            <td>{drug.interval}</td>
+                                            <td>{drug.period}</td>
                                             <td>{drug.first_time_at}</td>
                                             <td>
                                                 <button type="button" onClick={() => this.removeUser(drug.id)} className="btn btn-danger">Excluir</button>
